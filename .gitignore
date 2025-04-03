@@ -1,0 +1,7 @@
+trial_imgep/_unsloth_sentencepiece_temp/*
+trial_imgep/unsloth_compiled_cache/*
+trial_imgep/__pychache__/*
+
+/unsloth_compiled_cache/*
+_unsloth_sentencepiece_temp/*
+__pychache__/*

@@ -64,7 +64,7 @@ MUL R3, R4
 ## IMGEP
 * A goal is defined as a paire of core execution time `zg = {"core 1 execution time": 12, "core 2 execution time": 26"}` in the behavior space.
 The parameter space is defined as the code executed on **core 2**
-* The target loss is defined as the quadratic distance between an observation **z** and the goal **z_g** e.g if `z = {"core 1 execution time": 14, "core 2 execution time": 16"}`, then $Lg = \sqrt{{(12-14)}^{2}}
+* The target loss is defined as the quadratic distance between an observation **z** and the goal **z_g** e.g if `z = {"core 1 execution time": 14, "core 2 execution time": 16"}`, then $Lg = \sqrt{{(12-14)}^{2}}$
 * I pick 1-Nearest Neighbor algorithm for the selection operator and I simply use a quadratic distance for the target Loss.
 
 I would like to compare two main scenari for the implementation of a population based IMGEP:

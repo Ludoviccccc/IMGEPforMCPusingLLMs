@@ -58,7 +58,7 @@ MUL R3, R4
 The parameter space is defined as the code executed on **core 2**
 * The target loss is defined as the quadratic distance between an observation **z** and the goal **z_g** e.g if `z = {"core 1 execution time": 14, "core 2 execution time": 16"}`, then $Lg = \sqrt{{(12-14)}^{2} + {(26 - 16)}^2}$
 * I pick 1-Nearest Neighbor algorithm for the selection operator and I simply use a quadratic distance for the target Loss.
-* For the goal generator, I choose an discrete uniform law on set $\\{4,...,100\}\times\{4,...,100\}$
+* For the goal generator, I choose an discrete uniform law on set $\\{4,...,100\\}\times\{4,...,100\}$
 
 I would like to compare two main scenari for the implementation of a population based IMGEP:
 * The mutation operator is implemented as a python function. See folder `imgep.OptimizationPolicy.light_code_mutation`. The first iterations of the imgep loop are performed by python function `utils.generate_random_code`.

@@ -1,9 +1,11 @@
-from model import make_model
 from utils import *
+import sys
+sys.path.append("../")
 from mcpu5 import simulate_dual_core
 from join_string import join_strings
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 
 class History:
     def __init__(self, max_size = 100):
@@ -21,7 +23,8 @@ class History:
     def eviction(self):
         if len(self.memory_program)>self.max_size:
             self.memory_program = self.memory_program[-self.max_size:]
-            self.memory_signature = self.memory_signature[-self.max_size:]
+            self.memory_signature["core1_exec_time"] = self.memory_signature["core1_exec_time"][-self.max_size:]
+            self.memory_signature["core2_exec_time"] = self.memory_signature["core2_exec_time"][-self.max_size:]
     def select_closest_code(self,signature: dict)->dict:
         assert len(self.memory_program)>0, "history empty"
         b = np.transpose([h for h in self.memory_signature.values()])
@@ -45,52 +48,56 @@ class GoalGenerator:
         return {"core1_exec_time":np.random.randint(self.execution_time__min, self.execution_time__max, (N,)),
                "core2_exec_time":np.random.randint(self.execution_time__min, self.execution_time__max, (N,))}
 class OptimizationPolicy:
-    def __init__(self,model, tokenizer):
+    def __init__(self):
         """
         Selects a parameter based on a chosen goal and the history.
         Takes the code corresponding to the closest signature to the desired goal signature
         """
-        self.model = model
-        self.tokenizer = tokenizer
+        #self.model = model
+        #self.tokenizer = tokenizer
+        pass
     def __call__(self,goal:dict[list],H:History):
         closest_code = H.select_closest_code(goal) #most promising sample from the history
         output = self.light_code_mutation(closest_code["program"]) #expansion strategie: small random mutation
         return output
-    def light_code_mutation(self,program:list[str]):
-        messages = [
-        {"from": "human", "value": f"""I have a cpu simulator with registers R1 up to R10, and that takes assembly instructions STORE, LOAD, ADD, MUL as input. \n
-        Here is an example of a list of instructions in this language:
-        \n DIV R5, R6\n SUB R7, R8 \n LOAD R9, 30\nADD R9, R10\n
+    def light_code_mutation(self,assembly_code:list[str], mutation_rate=0.3):
+        mutated_code = assembly_code.copy()
+        num_mutations = max(1, int(len(mutated_code) * mutation_rate))
         
-        
-        A mutation of a list of instructions consists in inserting, deleting or replacing a few instruction in program. For instance, here is a mutation of the list above. I added a the instruction LOAD in the fist line and I have replaced the last instruction by an instruction STORE.
-        
-        
-        \nLOAD R4, 30\n DIV R5, R6\n SUB R7, R8 \n LOAD R9, 30\nSTORE R1, 20\n
-
-        Note that arithmetic operators take only two operands. For instance: "MUL R3, R2, R1" is not valid and "MUL R2, R1" is valid.
-        
-        Please, insert, delete or replace a few instructions of the program below.
-            Don't write python code. Your response has to contain only the mutated list of assembly instructions inside triple backticks with no more explanations.
-        {join_strings(program)}
-            """},
-        ]
-        return message2code(messages, self.model, self.tokenizer)
+        for _ in range(num_mutations):
+            mutation_type = random.choice(["insert", "delete", "replace"])
+            
+            if mutation_type == "insert":
+                # Insert a new random instruction at a random position
+                new_instr = generate_random_assembly(1)[0]
+                pos = random.randint(0, len(mutated_code))
+                mutated_code.insert(pos, new_instr)
+            
+            elif mutation_type == "delete" and len(mutated_code) > 1:
+                # Delete a random instruction
+                pos = random.randint(0, len(mutated_code) - 1)
+                mutated_code.pop(pos)
+            
+            elif mutation_type == "replace":
+                # Replace a random instruction with a new one
+                pos = random.randint(0, len(mutated_code) - 1)
+                new_instr = generate_random_assembly(1)[0]
+                mutated_code[pos] = new_instr
+        return mutated_code
 
 
 
 class IMGEP:
-    def __init__(self,model,tokenizer,N:int, N_init:int,H:History, G:GoalGenerator, Pi:OptimizationPolicy):
+    def __init__(self,N:int, N_init:int,H:History, G:GoalGenerator, Pi:OptimizationPolicy):
         """
-        model: llm
         N: int. The experimental budget
         N_init: int. Number of experiments at random
         H: History. Buffer containing codes and signature pairs
         G: GoalGenerator.
         Pi: OptimizationPolicy.
         """
-        self.model = model
-        self.tokenizer = tokenizer
+        #self.model = model
+        #self.tokenizer = tokenizer
         self.N = N
         self.H = H
         self.G = G
@@ -100,7 +107,8 @@ class IMGEP:
         for i in range(self.N):
             if i<self.N_init:
                 #Initial random iterations
-                core1_code = make_random_code(self.model, tokenizer=self.tokenizer)
+                #core1_code = make_random_code(self.model, tokenizer=self.tokenizer)
+                core1_code = generate_random_assembly(np.random.randint(1,20,1)[0])
             else:
                 #break
                 #Sample target goal

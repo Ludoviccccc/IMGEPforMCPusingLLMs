@@ -1,6 +1,7 @@
 from utils import code_extractor, make_random_code, message2code
 from imgep import IMGEP, GoalGenerator, OptimizationPolicy, History
-
+import sys
+sys.path.append("../")
 import torch
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("device", device)
@@ -18,7 +19,7 @@ from join_string import join_strings
 from mcpu5 import simulate_dual_core
 from model import make_model
 if __name__=="__main__":
-    max_size = 100
+    max_size = 3
     N = 5
     N_init = 2
     model_llm, tokenizer = make_model()

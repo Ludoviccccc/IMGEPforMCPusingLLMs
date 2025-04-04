@@ -1,5 +1,7 @@
 from model import make_model
 from utils import *
+import sys
+sys.path.append("../")
 from mcpu5 import simulate_dual_core
 from join_string import join_strings
 import matplotlib.pyplot as plt
@@ -16,7 +18,7 @@ class History:
             self.memory_program.append(sample["program"][j])
             self.memory_signature["core1_exec_time"].append(sample["signature"][j]["core1_exec_time"])
             self.memory_signature["core2_exec_time"].append(sample["signature"][j]["core2_exec_time"])
-        self.eviction()
+        #self.eviction()
 
     def eviction(self):
         if len(self.memory_program)>self.max_size:

@@ -1,7 +1,7 @@
 import torch
 import sys
-sys.path.append("../imgep_trial/")
-sys.path.append("../imgep_trial/")
+sys.path.append("../imgep_with_llm/")
+sys.path.append("../imgep_with_llm")
 from utils import code_extractor, make_random_code, message2code
 from imgep import IMGEP, GoalGenerator, OptimizationPolicy, History
 

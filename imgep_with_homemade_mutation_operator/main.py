@@ -25,5 +25,5 @@ if __name__=="__main__":
     plt.title(f"Imgep with experimental budget N={N} and Ninit = {N_init}")
     plt.xlabel("Core 1 execution time")
     plt.ylabel("Core 2 execution time")
-    pltsavefig("image/history_visual.png")
+    plt.savefig("image/history_visual.png")
     plt.show()

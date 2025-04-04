@@ -44,5 +44,5 @@ if __name__=="__main__":
     plt.title(f"Random Exploration with experimental budget N={N}")
     plt.xlabel("Core 1 execution time")
     plt.ylabel("Core 2 execution time")
-    pltsavefig("image/history_visual.png")
+    plt.savefig("image/history_visual.png")
     plt.show()

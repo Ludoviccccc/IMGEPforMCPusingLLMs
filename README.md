@@ -104,5 +104,5 @@ I can't show you interesting stuff with llm yet. Let's take a look at results fo
 
 Solarized dark             |  Solarized Ocean
 :-------------------------:|:-------------------------:
-![image](/imgep_with_homemade_mutation_operator/history_visual.png)  | ![image](/random_exploration_homemade_mutation_operator/history_visual.png) 
+![image](/imgep_with_homemade_mutation_operator/image/history_visual.png)  | ![image](/random_exploration_homemade_mutation_operator/image/history_visual.png) 
 

@@ -24,19 +24,19 @@ Memory Bus – Both cores competing for memory increases latency.
 ALU/FPUs – If both cores use heavy arithmetic operations, execution slows down.
 ```
 Implementation Plan:
-
+```
 Simulate Memory Contention – If both cores execute a LOAD or STORE simultaneously, add a penalty (extra cycles).
 
 Cache Conflicts – If the same memory region is accessed by both cores, introduce a cache penalty.
 
 Shared Execution Unit Delay – If both cores run MUL or DIV together, add extra latency to simulate execution unit contention.
-
+```
 I’ll now update the code to reflect these dependencies.
 
 I’ve updated the simulation to include shared resource contention:
-
+```
 Memory contention: If both cores execute LOAD or STORE together, they experience a penalty (extra cycles).
 
 Execution unit contention: If both cores run MUL or DIV at the same time, there's an additional delay. "
-
+```
 I have now an heuristic dual-core simulator that takes basic assembly code as input and outputs execution times for both cores.

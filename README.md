@@ -39,6 +39,6 @@ Memory contention: If both cores execute LOAD or STORE together, they experience
 
 Execution unit contention: If both cores run MUL or DIV at the same time, there's an additional delay. 
 ```
-"
+" \\
 
 I have now an heuristic dual-core simulator that takes basic assembly code as input and outputs execution times for both cores.

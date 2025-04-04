@@ -48,9 +48,21 @@ I have now an heuristic dual-core simulator that takes basic assembly code as in
 simulate_dual_core(core1_code:list[str], core2_code:list[str])->(int,int):
 ```
 
+# Approach
+
+Here two codes will be running at the same time.
+On **core 1**, the following will be running, and on **core 2**, we will synthetize disturbing codes, so that the execution time of **core 1** is sometimes elongated:
+```
+MUL R3, R4
+STORE R1, 20
+MOV R5, R6
+LOAD R1, 10
+ADD R1, R2
+MUL R3, R4
+```
 I would like to compare two main scenari for the implementation of a population based IMGEP:
 * The mutation operator is implemented as a python function. See folder `imgep.OptimizationPolicy.light_code_mutation`. The first iterations of the imgep loop are performed by python function `utils.generate_random_code`.
-* The mutation operator is a LLM that understands basic codes e.g Llama, gpt4 ext. This is done with a prompt. Unfortunatly, I am currently unable to use this code on my laptop because it takes too much power. Jean Zay or someone else should help me soon.
+* The mutation operator is a LLM that understands basic codes e.g Llama, gpt4 ext. This is done with a prompt. Unfortunatly, I am currently unable to use this code on my laptop for many iterations because it takes too much power. Hopefully, **Jean Zay** or someone else should come and help me soon.
 
 ```python
 class OptimizationPolicy:
@@ -86,3 +98,7 @@ class OptimizationPolicy:
         ]
         return message2code(messages, self.model, self.tokenizer)
 ```
+
+# Results
+
+I can't show you interesting stuff with llm yet. Let's take a look at results for a short imgep with a mutation operator implemented as a python function. We can compare these results with a random exploration, meaning that for a same budget `N >>1`, we generate random assembly code.

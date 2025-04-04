@@ -143,7 +143,7 @@ class UnslothDDPOConfig(DDPOConfig):
     )
     def __init__(
         self,
-        exp_name = 'main',
+        exp_name = '',
         run_name = '',
         seed = 3407,
         log_with = None,

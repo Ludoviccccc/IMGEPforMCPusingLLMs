@@ -16,13 +16,13 @@ Me:
 ChatGPT said:
 
 "To introduce shared resources between the cores, we need to model contention for components like:
-
+```
 Shared Cache (L2/L3) – Accessing shared memory introduces delays.
 
 Memory Bus – Both cores competing for memory increases latency.
 
 ALU/FPUs – If both cores use heavy arithmetic operations, execution slows down.
-
+```
 Implementation Plan:
 
 Simulate Memory Contention – If both cores execute a LOAD or STORE simultaneously, add a penalty (extra cycles).

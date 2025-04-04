@@ -42,3 +42,7 @@ Execution unit contention: If both cores run MUL or DIV at the same time, there'
 " 
 
 I have now an heuristic dual-core simulator that takes basic assembly code as input and outputs execution times for both cores.
+* Code mcpu5.py contains function 
+```python
+simulate_dual_core(core1_code:list[str], core2_code:list[str])->(int,int):
+```

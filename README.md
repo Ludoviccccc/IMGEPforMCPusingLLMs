@@ -110,3 +110,8 @@ class OptimizationPolicy:
 # Results
 
 I can't show you interesting stuff with llm yet. Let's take a look at results for a short imgep with a mutation operator implemented as a python function. We can compare these results with a random exploration, meaning that for a same budget `N >>1`, we generate random assembly code at each iteration.
+
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+![image](/imgep_with_homemade_mutation_operator/history_visual.png)  | ![image](/random_exploration_homemade_mutation_operator/history_visual.png) 
+

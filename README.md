@@ -1,12 +1,4 @@
-I have to focus on the expension operator and on the selection operator
-
-
-I have noted some key points from ETCHEVERRY manuscript that could be useful for the current problem.
-Models that are used in popIMGEP are often non-parametric.
-k-NN is a common example for the selection operator. The model learns during the exploration. It is also based on the expension of the history
-
-
-# Simulator
+# Simulator 💻
 
 Discussion we had with GPT
 Me:
@@ -50,7 +42,7 @@ simulate_dual_core(core1_code:list[str], core2_code:list[str])->(int,int):
 
 # Approach
 
-Here two codes will be running at the same time.
+Here two codes will be running at the same time, one for each core.
 On **core 1**, the following will be running, and on **core 2**, we will synthetize disturbing codes, so that the execution time of **core 1** is sometimes elongated:
 ```
 MUL R3, R4
@@ -64,7 +56,7 @@ MUL R3, R4
 ## IMGEP
 * A goal is defined as a paire of core execution time `zg = {"core 1 execution time": 12, "core 2 execution time": 26"}` in the behavior space.
 The parameter space is defined as the code executed on **core 2**
-* The target loss is defined as the quadratic distance between an observation **z** and the goal **z_g** e.g if `z = {"core 1 execution time": 14, "core 2 execution time": 16"}`, then $Lg = \sqrt{{(12-14)}^{2}}$
+* The target loss is defined as the quadratic distance between an observation **z** and the goal **z_g** e.g if `z = {"core 1 execution time": 14, "core 2 execution time": 16"}`, then $Lg = \sqrt{{(12-14)}^{2} + {(26 - 16)}^2}$
 * I pick 1-Nearest Neighbor algorithm for the selection operator and I simply use a quadratic distance for the target Loss.
 
 I would like to compare two main scenari for the implementation of a population based IMGEP:
@@ -105,7 +97,6 @@ class OptimizationPolicy:
         ]
         return message2code(messages, self.model, self.tokenizer)
 ```
-
 
 # Results
 

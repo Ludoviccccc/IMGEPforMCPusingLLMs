@@ -49,5 +49,5 @@ simulate_dual_core(core1_code:list[str], core2_code:list[str])->(int,int):
 ```
 
 I would like to compare two main scenari for the implementation of a population based IMGEP:
-* The mutation operator is implemented as a python function. See folder `imgep.OptimizationPolicy.light_code_mutation'. The first iterations of the imgep loop are performed by a python function 'utils.generate_random_code`.
+* The mutation operator is implemented as a python function. See folder `imgep.OptimizationPolicy.light_code_mutation`. The first iterations of the imgep loop are performed by a python function `utils.generate_random_code`.
 * The mutation operator is a LLM that understands basic codes e.g Llama, gpt4 ext. S

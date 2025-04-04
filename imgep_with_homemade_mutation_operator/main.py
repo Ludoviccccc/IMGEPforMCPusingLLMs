@@ -1,16 +1,15 @@
-from utils import code_extractor, make_random_code, message2code
 from imgep import IMGEP, GoalGenerator, OptimizationPolicy, History
 import numpy as np
-import torch
 import re
 from join_string import join_strings
 import sys
 sys.path.append("../")
 from mcpu5 import simulate_dual_core
+import matplotlib.pyplot as plt
 if __name__=="__main__":
-    max_size = 100
-    N = 200
-    N_init = 50
+    max_size = 1000 #max_size for the history
+    N = 1000 #experimental budget
+    N_init = 100 #Budget for random exploration at the begin
     Pi = OptimizationPolicy()
     G = GoalGenerator() 
     H = History(max_size = max_size)
@@ -23,3 +22,7 @@ if __name__=="__main__":
         print(h)
     print("memory signature",H.memory_signature)
     H.representation("image/history_visual")
+    plt.title(f"Imgep with experimental budget N={N} and Ninit = {N_init}")
+    plt.xlabel("Core 1 execution time")
+    plt.ylabel("Core 2 execution time")
+    plt.show()

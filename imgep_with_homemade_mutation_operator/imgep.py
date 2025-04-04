@@ -34,7 +34,8 @@ class History:
     def representation(self, name="image/history_visual"):
         plt.figure()
         plt.scatter(self.memory_signature["core2_exec_time"],self.memory_signature["core1_exec_time"])
-        plt.savefig(name)
+#        plt.plot()
+#        plt.savefig(name)
 
 
 

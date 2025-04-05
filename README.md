@@ -104,9 +104,11 @@ class OptimizationPolicy:
 I can't show you interesting stuff with llm yet. Let's take a look at results for a short imgep with a mutation operator implemented as a python function. We can compare these results with a random exploration, meaning that for a same budget `N >>1`, we generate random assembly code at each iteration.
 The results are easy to interpret. The more we see columns and the longer they are, the better is the exploration. Pictures bellow suggest that POP-IMGEP outperforms the random exploration, but I agree it is not obvious. I will further try to improve the imgep.
 
+
+![image](/image/comparaison.png)
+
 POP-IMGEP with python function mutator             |  Random exploration
 :-------------------------:|:-------------------------:
 ![image](/imgep_with_homemade_mutation_operator/image/history_visual.png)  | ![image](/random_exploration_homemade_mutation_operator/image/history_visual.png) 
 
 
-![image](/image/comparaison.png)

@@ -1,19 +1,12 @@
 # Simulator 💻
 
-```
-Shared Cache (L2/L3) – Accessing shared memory introduces delays.
-
-Memory Bus – Both cores competing for memory increases latency.
-
-ALU/FPUs – If both cores use heavy arithmetic operations, execution slows down.
-```
 Implementation Plan:
 ```
 Simulate Memory Contention – If both cores execute a LOAD or STORE simultaneously, add a penalty (extra cycles).
 
-Cache Conflicts – If the same memory region is accessed by both cores, introduce a cache penalty.
+(L2/3) Cache Conflicts – If the same memory region is accessed by both cores, introduce a cache penalty.
 
-Shared Execution Unit Delay – If both cores run MUL or DIV together, add extra latency to simulate execution unit contention.
+ALU/FPUs – Shared Execution Unit Delay –If both cores use heavy arithmetic operations, execution slows down.  When cores run MUL or DIV together, extra latency is added to simulate execution unit contention.
 ```
 
 I have now an heuristic dual-core simulator that takes basic assembly code as input and outputs execution times for both cores.

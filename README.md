@@ -107,4 +107,6 @@ The results are easy to interpret. The more we see columns and the longer they a
 POP-IMGEP with python function mutator             |  Random exploration
 :-------------------------:|:-------------------------:
 ![image](/imgep_with_homemade_mutation_operator/image/history_visual.png)  | ![image](/random_exploration_homemade_mutation_operator/image/history_visual.png) 
+
+
 ![image](/imgep_with_homemade_mutation_operator/image/comparaison.png)

@@ -6,6 +6,7 @@ import sys
 sys.path.append("../")
 from mcpu5 import simulate_dual_core
 import matplotlib.pyplot as plt
+import pickle
 if __name__=="__main__":
     max_size = 1000 #max_size for the history
     N = 1000 #experimental budget
@@ -27,3 +28,5 @@ if __name__=="__main__":
     plt.ylabel("Core 2 execution time")
     plt.savefig("image/history_visual.png")
     plt.show()
+    with open("dict/imgep.pickle", "wb") as f:
+        pickle.dump(H.memory_signature,f)

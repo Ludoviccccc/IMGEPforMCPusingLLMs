@@ -9,6 +9,7 @@ import numpy as np
 import re
 from join_string import join_strings
 from mcpu5 import simulate_dual_core
+import pickle
 
 
 if __name__=="__main__":
@@ -46,3 +47,5 @@ if __name__=="__main__":
     plt.ylabel("Core 2 execution time")
     plt.savefig("image/history_visual.png")
     plt.show()
+    with open("dict/randomexploration.pickle", "wb") as f:
+        pickle.dump(H.memory_signature,f)

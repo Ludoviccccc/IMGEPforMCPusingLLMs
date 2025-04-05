@@ -1,11 +1,12 @@
 # Simulator 💻
 
 I manipulate a code obtained with gpt that simulates a dual core processor. See folder `prompt`.    
-Only a few assembly instructions are availble, the ones playing a role in interferences.
+Only a few assembly instructions are availble, the ones playing a role in interferences. These are momery instructions (`LOAD,STORE, MOV`) and arithmetic operations (`MUL, DIV, SUB, ADD`).
+Although it is not so realistic, each instruction has a default execution time in cycles.
 ```python
 instruction_times = {
         "LOAD": 2, "STORE": 2, "ADD": 1, "SUB": 1, 
-        "MUL": 3, "DIV": 4, "MOV": 1  # Added MOV instruction (1 cycle)
+        "MUL": 3, "DIV": 4, "MOV": 1  
     }
 ```
 Implementation Plan:
@@ -15,7 +16,7 @@ Implementation Plan:
 * (L2/3) Cache Conflicts – If the same memory region is accessed by both cores, introduce a cache penalty.
 
 * ALU/FPUs – Shared Execution Unit Delay –If both cores use heavy arithmetic operations, execution slows down.  When cores run MUL or DIV together, extra latency is added to simulate execution unit contention.
-```
+```python
         if core1_op in ["LOAD", "STORE"] and core2_op in ["LOAD", "STORE"]:
             core1_cycles += memory_penalty
             core2_cycles += memory_penalty

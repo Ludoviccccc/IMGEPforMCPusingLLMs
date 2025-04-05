@@ -1,5 +1,13 @@
 # Simulator 💻
 
+I manipulate a code obtained with gpt that simulates a dual core processor. See folder `prompt`.    
+Only a few assembly instructions are availble, the ones playing a role in interferences.
+```python
+instruction_times = {
+        "LOAD": 2, "STORE": 2, "ADD": 1, "SUB": 1, 
+        "MUL": 3, "DIV": 4, "MOV": 1  # Added MOV instruction (1 cycle)
+    }
+```
 Implementation Plan:
 
 * Simulate Memory Contention – If both cores execute a LOAD or STORE simultaneously, add a penalty (extra cycles).
@@ -7,7 +15,21 @@ Implementation Plan:
 * (L2/3) Cache Conflicts – If the same memory region is accessed by both cores, introduce a cache penalty.
 
 * ALU/FPUs – Shared Execution Unit Delay –If both cores use heavy arithmetic operations, execution slows down.  When cores run MUL or DIV together, extra latency is added to simulate execution unit contention.
+```
+        if core1_op in ["LOAD", "STORE"] and core2_op in ["LOAD", "STORE"]:
+            core1_cycles += memory_penalty
+            core2_cycles += memory_penalty
 
+        # Detect execution unit contention
+        if core1_op in ["MUL", "DIV"] and core2_op in ["MUL", "DIV"]:
+            core1_cycles += execution_unit_penalty
+            core2_cycles += execution_unit_penalty
+        
+        # Detect cache conflicts
+        if core1_mem and core2_mem and core1_mem == core2_mem:
+            core1_cycles += cache_penalty
+            core2_cycles += cache_penalty
+```
 I have now an heuristic dual-core simulator that takes basic assembly code as input and outputs execution times for both cores.
 
 * Code mcpu5.py contains a function that simulates the dual core behavior. It takes two list of mnemonics as input and outputs execution time (in cycle) for both core.

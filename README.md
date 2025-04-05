@@ -1,13 +1,5 @@
 # Simulator 💻
 
-Discussion we had with GPT
-Me:
-
-"Can you detail shared resources between the cores so that the execution time on one core depends on what is running on the other core ? "
-
-ChatGPT said:
-
-"To introduce shared resources between the cores, we need to model contention for components like:
 ```
 Shared Cache (L2/L3) – Accessing shared memory introduces delays.
 
@@ -23,15 +15,6 @@ Cache Conflicts – If the same memory region is accessed by both cores, introdu
 
 Shared Execution Unit Delay – If both cores run MUL or DIV together, add extra latency to simulate execution unit contention.
 ```
-I’ll now update the code to reflect these dependencies.
-
-I’ve updated the simulation to include shared resource contention:
-```
-Memory contention: If both cores execute LOAD or STORE together, they experience a penalty (extra cycles).
-
-Execution unit contention: If both cores run MUL or DIV at the same time, there's an additional delay. 
-```
-" 
 
 I have now an heuristic dual-core simulator that takes basic assembly code as input and outputs execution times for both cores.
 
@@ -39,6 +22,8 @@ I have now an heuristic dual-core simulator that takes basic assembly code as in
 ```python
 simulate_dual_core(core1_code:list[str], core2_code:list[str])->(int,int):
 ```
+## Demonstration:
+
 
 # Approach
 

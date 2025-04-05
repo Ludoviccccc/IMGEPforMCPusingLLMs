@@ -16,6 +16,6 @@ if __name__=="__main__":
     plt.ylabel("execution time core 2")
     plt.title(f"Imgep with experimental budget N={N} and Ninit = {N_init} VS Random exploration with N={N}")
     plt.legend()
-    plt.show()
     plt.savefig("image/comparaison")
+    plt.show()
 

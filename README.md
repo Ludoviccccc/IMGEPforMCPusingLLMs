@@ -39,9 +39,6 @@ simulate_dual_core(core1_code:list[str], core2_code:list[str])->(int,int):
 ```
 ## Demonstration:
 ```python
-from utils import *
-import sys
-sys.path.append("../")
 from mcpu5 import simulate_dual_core
 
 core1_exec_time, core2_exec_time = simulate_dual_core(

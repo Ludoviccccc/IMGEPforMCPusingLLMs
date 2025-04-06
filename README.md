@@ -99,10 +99,10 @@ class OptimizationPolicy:
         return message2code(messages, self.model, self.tokenizer)
 ```
 
-# Results for POP-IMGEP
+# Results for POP-IMGEP with python function mutator
 
-I can't show you interesting stuff with llm yet. Let's take a look at results for a short imgep with a mutation operator implemented as a python function. We can compare these results with a random exploration, meaning that for a same budget `N >>1`, we generate random assembly code at each iteration.
-The results are easy to interpret. The more we see columns and the longer they are, the better is the exploration. Pictures bellow suggest that POP-IMGEP outperforms the random exploration. 
+I can't show you interesting results with llms yet. Let's take a look at results for a short imgep with a mutation operator implemented as a python function. We can compare these results with a random exploration, meaning that for a same budget `N >>1`, we generate random assembly code at each iteration.
+The results are easy to interpret i.e the more we see columns and the longer they are, the better is the exploration. Pictures bellow suggest that POP-IMGEP outperforms the random exploration. 
 
 
 ![image](/image/comparaison.png)

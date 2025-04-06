@@ -38,6 +38,7 @@ I have now an heuristic dual-core simulator that takes basic assembly code as in
 simulate_dual_core(core1_code:list[str], core2_code:list[str])->(int,int):
 ```
 ## Demonstration:
+The exemple below shows that code on core 1 (that will remain the same during the exploration) runs with 12 cycles.
 ```python
 from mcpu5 import simulate_dual_core
 

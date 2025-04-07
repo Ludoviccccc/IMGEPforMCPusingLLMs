@@ -159,5 +159,6 @@ The results are easy to interpret i.e the more we see columns and the longer the
 POP-IMGEP with python function mutator             |  Random exploration
 :-------------------------:|:-------------------------:
 ![image](/imgep_with_homemade_mutation_operator/image/history_visual.png)  | ![image](/random_exploration_homemade_mutation_operator/image/history_visual.png) 
+:-------------------------:|:-------------------------:
 
 Next, I will attempt to improve the exploration by considering kNN algorithm with $k>1$.

@@ -83,7 +83,9 @@ The parameter space is defined as the code executed on **core 2**
 
 I would like to compare two main scenari for the implementation of a population based IMGEP:
 * The mutation operator is implemented as a python function. See the function bellow i.e `imgep.OptimizationPolicy.light_code_mutation`. The first iterations of the imgep loop are performed by python function `utils.generate_random_code`.
-```
+
+```python
+
 def light_code_mutation(self,assembly_code:list[str], mutation_rate=0.3):
     mutated_code = assembly_code.copy()
     num_mutations = max(1, int(len(mutated_code) * mutation_rate))

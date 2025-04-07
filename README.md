@@ -78,12 +78,38 @@ MUL R3, R4
 * A goal is defined as a paire of core execution time `zg = {"core 1 execution time": 12, "core 2 execution time": 26"}` in the behavior space.
 The parameter space is defined as the code executed on **core 2**
 * The target loss is defined as the quadratic distance between an observation **z** and the goal **z_g** e.g if `z = {"core 1 execution time": 14, "core 2 execution time": 16"}`, then $Lg = \sqrt{{(12-14)}^{2} + {(26 - 16)}^2}$
-* I pick 1-Nearest Neighbor algorithm for the selection operator and I simply use a quadratic distance for the target Loss.
-* For the goal generator, I choose an discrete uniform law on set $\\{4,...,100\\}\times\\{4,...,100\\}$
+* I pick 1-Nearest Neighbor algorithm for the selection operator.
+* For the goal generator, I choose an discrete uniform distribution $\mathcal{U}_{\\{4,...,100\\}\times\\{4,...,100\\}}$
 
 I would like to compare two main scenari for the implementation of a population based IMGEP:
-* The mutation operator is implemented as a python function. See folder `imgep.OptimizationPolicy.light_code_mutation`. The first iterations of the imgep loop are performed by python function `utils.generate_random_code`.
-* The mutation operator is a LLM that understands basic codes e.g Llama, gpt4 ext. This is done with a prompt such as bellow. Unfortunatly, I am currently unable to use this code on my laptop for many iterations because it takes too much power. Hopefully, **Jean Zay** or someone else should come and help me soon.
+* The mutation operator is implemented as a python function. See the function bellow i.e `imgep.OptimizationPolicy.light_code_mutation`. The first iterations of the imgep loop are performed by python function `utils.generate_random_code`.
+```
+def light_code_mutation(self,assembly_code:list[str], mutation_rate=0.3):
+    mutated_code = assembly_code.copy()
+    num_mutations = max(1, int(len(mutated_code) * mutation_rate))
+    
+    for _ in range(num_mutations):
+        mutation_type = random.choice(["insert", "delete", "replace"])
+        
+        if mutation_type == "insert":
+            # Insert a new random instruction at a random position
+            new_instr = generate_random_assembly(1)[0]
+            pos = random.randint(0, len(mutated_code))
+            mutated_code.insert(pos, new_instr)
+        
+        elif mutation_type == "delete" and len(mutated_code) > 1:
+            # Delete a random instruction
+            pos = random.randint(0, len(mutated_code) - 1)
+            mutated_code.pop(pos)
+        
+        elif mutation_type == "replace":
+            # Replace a random instruction with a new one
+            pos = random.randint(0, len(mutated_code) - 1)
+            new_instr = generate_random_assembly(1)[0]
+            mutated_code[pos] = new_instr
+    return mutated_code
+```
+* The mutation operator is a LLM that understands basic codes e.g Llama, gpt4 ext. This is done with a prompt such as bellow. Soon, I will try it on **Jean Zay** or with another platform.
 
 ```python
 class OptimizationPolicy:
@@ -122,7 +148,7 @@ class OptimizationPolicy:
 
 # Results for POP-IMGEP with python function mutator
 
-I can't show you interesting results with llms yet. Let's take a look at results for a short imgep with a mutation operator implemented as a python function. We can compare these results with a random exploration, meaning that for a same budget `N >>1`, we generate random assembly code at each iteration.
+I can't produce interesting results with llms yet. Let's take a look at results for a short imgep with a mutation operator implemented as a python function. We can compare these results with a random exploration, meaning that for a same budget `N >>1`, we generate random assembly code at each iteration. See code `random_exploration.main.py`.
 The results are easy to interpret i.e the more we see columns and the longer they are, the better is the exploration. Pictures bellow suggest that POP-IMGEP outperforms the random exploration. 
 
 
@@ -132,4 +158,4 @@ POP-IMGEP with python function mutator             |  Random exploration
 :-------------------------:|:-------------------------:
 ![image](/imgep_with_homemade_mutation_operator/image/history_visual.png)  | ![image](/random_exploration_homemade_mutation_operator/image/history_visual.png) 
 
-
+Next, I will attempt to improve the exploration by considering kNN algorithm with $k>1$.

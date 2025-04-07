@@ -24,8 +24,8 @@ if __name__=="__main__":
     print("memory signature",H.memory_signature)
     H.representation("image/history_visual")
     plt.title(f"Imgep with experimental budget N={N} and Ninit = {N_init}")
-    plt.xlabel("Core 1 execution time")
-    plt.ylabel("Core 2 execution time")
+    plt.ylabel("Core 1 execution time")
+    plt.xlabel("Core 2 execution time")
     plt.savefig("image/history_visual.png")
     plt.show()
     with open("dict/imgep.pickle", "wb") as f:

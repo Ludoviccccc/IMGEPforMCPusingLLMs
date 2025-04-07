@@ -43,8 +43,8 @@ if __name__=="__main__":
     print("signatures:",H.memory_signature)
     H.representation()
     plt.title(f"Random Exploration with experimental budget N={N}")
-    plt.xlabel("Core 1 execution time")
-    plt.ylabel("Core 2 execution time")
+    plt.ylabel("Core 1 execution time")
+    plt.xlabel("Core 2 execution time")
     plt.savefig("image/history_visual.png")
     plt.show()
     with open("dict/randomexploration.pickle", "wb") as f:

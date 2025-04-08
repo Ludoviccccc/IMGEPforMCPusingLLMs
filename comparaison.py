@@ -11,7 +11,7 @@ if __name__=="__main__":
     N = 10000
     plt.figure(figsize=(10,8))
     plt.scatter(imgep["core2_exec_time"],imgep["core1_exec_time"], label="imgep")
-    plt.scatter(random_exploration["core2_exec_time"],random_exploration["core1_exec_time"], label="random exploration")
+    plt.scatter(random_exploration["core2_exec_time"],random_exploration["core1_exec_time"], label="random exploration", marker = ".")
     plt.ylabel("execution time core 1")
     plt.xlabel("execution time core 2")
     plt.title(f"Imgep with experimental budget N={N} and Ninit = {N_init} VS Random exploration with N={N}")

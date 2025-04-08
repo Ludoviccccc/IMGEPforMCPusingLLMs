@@ -38,7 +38,7 @@ I have now an heuristic dual-core simulator that takes basic assembly code as in
 simulate_dual_core(core1_code:list[str], core2_code:list[str])->(int,int):
 ```
 ## Demonstration:
-The exemple below shows that code on core 1 (that will remain the same during the exploration) runs with 12 cycles.
+The exemple below shows that code on core 1 (that we could choose to remain the same during the exploration) runs with 12 cycles.
 ```python
 from mcpu5 import simulate_dual_core
 
@@ -58,7 +58,27 @@ print("core2_exec_time", core2_exec_time)
 >>> core1_exec_time 0
 >>> core2_exec_time 12
 ```
+If a code runs on core 1 and uses same ressources of core 2, than execution time of core 2 will be larger:
+```python
+core1_exec_time, core2_exec_time = simulate_dual_core(core1_code = ["DIV R4,R5",
+                                                                    "STORE R1, 20"
+                                                                    "MOV R5, R6",
+                                                                    "LOAD R1, 10",
+                                                                    "ADD R1, R2",],
+                                                    core2_code =["MUL R3, R4",
+                                                                "STORE R1, 20",
+                                                                "MOV R5, R6",
+                                                                "LOAD R1, 10",
+                                                                "ADD R1, R2",
+                                                                "MUL R3, R4",])
 
+print("core1_exec_time", core1_exec_time)
+print("core2_exec_time", core2_exec_time)
+```
+```
+>>> core1_exec_time 13
+>>> core2_exec_time 16
+```
 
 
 # Approach

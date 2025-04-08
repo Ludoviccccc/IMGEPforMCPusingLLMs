@@ -58,7 +58,7 @@ print("core2_exec_time", core2_exec_time)
 >>> core1_exec_time 0
 >>> core2_exec_time 12
 ```
-If a code runs on core 1 and uses same ressources of core 2, than execution time of core 2 will be larger:
+If a code runs on core 1 and uses same ressources than core 2, then execution time of core 2 will be larger:
 ```python
 core1_exec_time, core2_exec_time = simulate_dual_core(core1_code = ["DIV R4,R5",
                                                                     "STORE R1, 20"

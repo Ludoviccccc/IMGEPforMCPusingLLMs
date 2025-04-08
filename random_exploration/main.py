@@ -35,7 +35,7 @@ if __name__=="__main__":
     max_size = 1000
     H = History(max_size)
 
-    with open("../imgep_with_homemade_mutation_operator/code.pickle", "rb") as f:
+    with open("../example/code.pickle", "rb") as f:
         Code = pickle.load(f)
     randomexploration = RandomExploration(Code,N, H)
     randomexploration()

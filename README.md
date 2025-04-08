@@ -84,7 +84,7 @@ print("core2_exec_time", core2_exec_time)
 # Approach
 
 Here two codes will be running at the same time, one for each core.
-On **core 1**, the following will be running, and on **core 2**, we will synthetize disturbing codes, so that the execution time of **core 1** is sometimes elongated:
+On **core 1**, code `example.code.pickle` will be running, and on **core 2**, we will synthetize disturbing codes, so that the execution time of **core 1** is sometimes elongated:
 ```
 MUL R3, R4
 STORE R1, 20

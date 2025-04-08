@@ -16,9 +16,8 @@ if __name__=="__main__":
     G = GoalGenerator() 
     H = History(max_size = max_size)
 
-    Code = generate_random_assembly(50)
-    with open('code.pickle', 'wb') as f:
-            pickle.dump(Code,f)
+    with open("..\example\code.pickle","rb") as f):
+        Code = pickle.load(f)
     Imgep = IMGEP(Code,N, N_init, H, G, Pi)
 
     #Exploration

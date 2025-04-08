@@ -1,4 +1,4 @@
-# Simulator 💻
+# Simulator MCPU 💻
 
 I manipulate a code obtained with gpt that simulates a dual core processor. See folder `prompt`.    
 Only a few assembly instructions are availble, the ones playing a role in interferences. These are momery instructions (`LOAD,STORE, MOV`) and arithmetic operations (`MUL, DIV, SUB, ADD`).

@@ -8,7 +8,7 @@ if __name__=="__main__":
     with open("random_exploration/dict/randomexploration.pickle","rb") as f:
         random_exploration = pickle.load(f)
     N_init = 100
-    N = 1000
+    N = 10000
     plt.figure(figsize=(10,8))
     plt.scatter(imgep["core2_exec_time"],imgep["core1_exec_time"], label="imgep")
     plt.scatter(random_exploration["core2_exec_time"],random_exploration["core1_exec_time"], label="random exploration")

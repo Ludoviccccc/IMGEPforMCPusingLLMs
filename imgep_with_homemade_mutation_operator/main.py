@@ -7,14 +7,19 @@ sys.path.append("../")
 from mcpu5 import simulate_dual_core
 import matplotlib.pyplot as plt
 import pickle
+from utils import generate_random_assembly
 if __name__=="__main__":
     max_size = 1000 #max_size for the history
-    N = 1000 #experimental budget
+    N = 10000 #experimental budget
     N_init = 100 #Budget for random exploration at the begin
     Pi = OptimizationPolicy()
     G = GoalGenerator() 
     H = History(max_size = max_size)
-    Imgep = IMGEP(N, N_init, H, G, Pi)
+
+    Code = generate_random_assembly(50)
+    with open('code.pickle', 'wb') as f:
+            pickle.dump(Code,f)
+    Imgep = IMGEP(Code,N, N_init, H, G, Pi)
 
     #Exploration
     Imgep()

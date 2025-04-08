@@ -15,30 +15,29 @@ import pickle
 if __name__=="__main__":
     print(__name__)
     class RandomExploration:
-        def __init__(self,N:int,H:History):
+        def __init__(self,code:list[str],N:int,H:History):
             """
             N:int. Experimental budget
             """
             self.N = N
             self.H = H
+            self.code = code
         def __call__(self):
             for i in range(self.N):
                 core1_code = generate_random_assembly(np.random.randint(0,20,1)[0])
                 core1_exec_time, core2_exec_time = simulate_dual_core(
                                                     core1_code = core1_code,
-                                                    core2_code =["MUL R3, R4",
-                                                                "STORE R1, 20",
-                                                                "MOV R5, R6",
-                                                                "LOAD R1, 10",
-                                                                "ADD R1, R2",
-                                                                "MUL R3, R4",])
+                                                    core2_code = self.code)
                 self.H.store({"program":[core1_code],
                              "signature": [{"core1_exec_time": core1_exec_time,
                                             "core2_exec_time": core2_exec_time}]})
-    N = 1000
+    N = 10000
     max_size = 1000
     H = History(max_size)
-    randomexploration = RandomExploration(N, H)
+
+    with open("../imgep_with_homemade_mutation_operator/code.pickle", "rb") as f:
+        Code = pickle.load(f)
+    randomexploration = RandomExploration(Code,N, H)
     randomexploration()
     print("signatures:",H.memory_signature)
     H.representation()

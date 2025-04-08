@@ -4,6 +4,7 @@ import re
 from join_string import join_strings
 import sys
 sys.path.append("../")
+import os
 from mcpu5 import simulate_dual_core
 import matplotlib.pyplot as plt
 import pickle
@@ -16,7 +17,7 @@ if __name__=="__main__":
     G = GoalGenerator() 
     H = History(max_size = max_size)
 
-    with open("..\example\code.pickle","rb") as f):
+    with open(os.path.join("../example","code.pickle"),"rb") as f:
         Code = pickle.load(f)
     Imgep = IMGEP(Code,N, N_init, H, G, Pi)
 

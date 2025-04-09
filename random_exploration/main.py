@@ -3,12 +3,13 @@ import sys
 import matplotlib.pyplot as plt
 sys.path.append("../imgep_with_homemade_mutation_operator/")
 sys.path.append("../")
+#sys.path.append("../")V
 from utils import generate_random_assembly
 from imgep import History
 import numpy as np
 import re
 from join_string import join_strings
-from mcpu5 import simulate_dual_core
+from simulators.mcpu5 import simulate_dual_core
 import pickle
 
 
@@ -24,7 +25,7 @@ if __name__=="__main__":
             self.code = code
         def __call__(self):
             for i in range(self.N):
-                core1_code = generate_random_assembly(np.random.randint(0,20,1)[0])
+                core1_code = generate_random_assembly(np.random.randint(0,100,1)[0])
                 core1_exec_time, core2_exec_time = simulate_dual_core(
                                                     core1_code = core1_code,
                                                     core2_code = self.code)
@@ -32,7 +33,7 @@ if __name__=="__main__":
                              "signature": [{"core1_exec_time": core1_exec_time,
                                             "core2_exec_time": core2_exec_time}]})
     N = 10000
-    max_size = 1000
+    max_size = 10000
     H = History(max_size)
 
     with open("../example/code.pickle", "rb") as f:

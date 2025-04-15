@@ -38,9 +38,10 @@ if __name__=="__main__":
 
     with open("../example/code.pickle", "rb") as f:
         Code = pickle.load(f)
+    #print("code", len(Code))
+    #exit()
     randomexploration = RandomExploration(Code,N, H)
     randomexploration()
-    print("signatures:",H.memory_signature)
     H.representation()
     plt.title(f"Random Exploration with experimental budget N={N}")
     plt.ylabel("Core 1 execution time")

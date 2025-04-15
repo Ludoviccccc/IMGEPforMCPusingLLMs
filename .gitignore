@@ -10,3 +10,7 @@ __pychache__/*
 /home/ludovic/Documents/multicore_gptsim2/random_exploration_with_llm/__pychache__/*
 .gitignore
 bin/*
+imgep_with_homemade_mutation_operator/__pycache__/imgep.cpython-312.pyc
+imgep_with_homemade_mutation_operator/__pycache__/join_string.cpython-312.pyc
+imgep_with_homemade_mutation_operator/__pycache__/utils.cpython-312.pyc
+
